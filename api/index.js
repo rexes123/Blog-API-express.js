@@ -373,9 +373,17 @@ app.get("/email", (req, res) => {
 //   res.sendFile(path.join(__dirname, "/index.html"));
 // });
 
+app.use((req, res) => {
+  res.status(404).sendFile(path.join(__dirname, "./error.html"));
+});
 
 app.use((req, res) => {
   res.status(404).sendFile(path.join(__dirname, "../public", "error.html")); // Update path to point to 'public' directory
+});
+
+const PORT = process.env.PORT || 3000; // Use a different port if needed
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
 
 module.exports = (req, res) => app(req, res);
